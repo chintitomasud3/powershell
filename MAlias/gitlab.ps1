@@ -1,0 +1,1 @@
+New-Alias -Name "List" Get-ChildItem
