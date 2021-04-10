@@ -1,4 +1,4 @@
-Import-Module -Name networkprocess,killprocess -Force
+Import-Module -Name networkprocess,killprocess,utility -Force
 
 
 function Get-GitStatus { & git status -sb $args }

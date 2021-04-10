@@ -30,6 +30,6 @@ function Stop-Processes {
 
 
 function Stop-ProcessesForGame {
-   Stop-Processes notepad,chrome,wpscenter,IDMan,IEMonitor,SamsungMagician,AdobeARM,AppMarket,TBSWebRenderer
+   Stop-Processes notepad,chrome,wpscenter,IDMan,IEMonitor,AdobeARM,AppMarket,TBSWebRenderer
 }
 
