@@ -1,0 +1,54 @@
+function masud {
+ dir
+}
+
+function Open-DateTimeSettings {
+    Start-Process timedate.cpl
+}
+
+function Run-AsAdmin {
+    param (
+        [string]$Command
+    )
+
+    # Create a secure string for the password (if needed)
+    $securePassword = Read-Host -AsSecureString "Enter password (if required)"
+
+    # Create a new process start info object
+    $startInfo = New-Object System.Diagnostics.ProcessStartInfo
+    $startInfo.FileName = "powershell.exe"
+    $startInfo.Arguments = "-NoProfile -ExecutionPolicy Bypass -Command $Command"
+    $startInfo.Verb = "runas"  # This ensures the process runs as administrator
+
+    # Start the process
+    [System.Diagnostics.Process]::Start($startInfo)
+}
+
+function ms {
+    param (
+        [string]$Name
+    )
+
+    # Define a hashtable with directory names and paths
+    $directories = @{
+        "s" = "F:\MASUD\Shortcut"
+        "dms" = "F:\MASUD\`[04`]For Scanning DMS"  # Escaped brackets
+    }
+
+    # Check if the provided name exists in the hashtable
+    if ($directories.ContainsKey($Name)) {
+        $path = $directories[$Name]
+
+        # Check if the path exists
+        if (Test-Path $path) {
+            Start-Process explorer.exe -ArgumentList $path
+        } else {
+            Write-Host "The path '$path' does not exist." -ForegroundColor Red
+        }
+    } else {
+        Write-Host "Directory name '$Name' not found." -ForegroundColor Red
+    }
+}
+
+# Usage example:
+# Open-Directory -Name "dms"
