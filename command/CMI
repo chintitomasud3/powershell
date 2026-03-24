@@ -1,0 +1,7 @@
+# প্রসেসর এবং ওএস এর তথ্য নিয়ে একটি JSON তৈরি করা
+$data = @{
+    CPU = (Get-CimInstance Win32_Processor).Name
+    RAM = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property Capacity -Sum).Sum / 1GB
+    OS  = (Get-CimInstance Win32_OperatingSystem).Caption
+}
+$data | ConvertTo-Json | Out-File "system_data.json"
